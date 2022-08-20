@@ -41,7 +41,7 @@ void UpdateCoinsAndStars();
 void UpdateLasers();
 void UpdateDestroyed();
 void UpdateAgent8();
-// void RestartGame();
+void ResetGame();
 
 // The entry point for a PlayBuffer program
 void MainGameEntry( PLAY_IGNORE_COMMAND_LINE )
@@ -71,14 +71,10 @@ bool MainGameUpdate( float elapsedTime )
 	UpdateCoinsAndStars();
 	UpdateLasers();
 	UpdateDestroyed();
-	//RestartGame();
-	Play::DrawFontText("64px", "ARROW KEYS TO MOVE UP AND DOWN AND SPACE TO FIRE", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT - 30 }, Play::CENTRE);
+	Play::DrawFontText("64px", "ARROW KEYS: MOVE UP AND DOWN, SPACE: FIRE, ENTERE: RESET", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT - 30 }, Play::CENTRE);
 	Play::DrawFontText("132px", "SCORE: " + std::to_string(gameState.score), { DISPLAY_WIDTH / 2, 50 }, Play::CENTRE);
 	Play::PresentDrawingBuffer();
 	return Play::KeyDown( VK_ESCAPE );
-	// return Play:KeyDown( VK_RETURN); 
-	??
-
 }
 
 // Gets called once when the player quits the game 
@@ -100,6 +96,10 @@ void HandlePlayerControls()
 	{
 		obj_agent8.acceleration = { 0, 1 };
 		Play::SetSprite(obj_agent8, "agent8_fall", 0);
+	}
+	else if (Play::KeyDown(VK_RETURN))
+	{
+		ResetGame();
 	}
 	else
 	{
@@ -352,4 +352,11 @@ void UpdateAgent8()
 	}
 	Play::DrawLine({ obj_agent8.pos.x, 0 }, obj_agent8.pos, Play::cWhite);
 	Play::DrawObjectRotated(obj_agent8);
+}
+
+
+
+void ResetGame()
+{
+
 }
