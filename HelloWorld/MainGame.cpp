@@ -359,8 +359,8 @@ void UpdateAgent8()
 void ResetGame()
 {
 	// if spider is allive , kill it
-	if (gameState.agentState != STATE_DEAD)
-	{
+	//if (gameState.agentState != STATE_DEAD)
+	//{
 		GameObject& obj_agent8 = Play::GetGameObjectByType(TYPE_AGENT8);
 		obj_agent8.acceleration = { -0.3f, 0.5f };
 		obj_agent8.velocity = { 115,0 };
@@ -368,18 +368,16 @@ void ResetGame()
 
 		obj_agent8.type = TYPE_DESTROYED;
 
-		//gameState.agentState = STATE_DEAD;
-	}
-	else
+		gameState.agentState = STATE_DEAD;
+	//}
+	gameState.agentState = STATE_APPEAR;
 	// make a new spider
-	//gameState.agentState = STATE_APPEAR;
+	//GameObject& obj_agent8 = Play::GetGameObjectByType(TYPE_AGENT8);
+	//HandlePlayerControls();
 	Play::CreateGameObject(TYPE_AGENT8, { 115, 0 }, 50, "agent8");
-	
-
+	UpdateAgent8();
 	// reset the score
 	gameState.score = 0;
-
-
 
 
 	//GameObject& obj_agent8 = Play::GetGameObjectByType(TYPE_AGENT8);
